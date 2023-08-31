@@ -1,0 +1,25 @@
+#Querys/Scripts em Powershell que podem auxiliar em rotinas de auditoria do Active Directory
+
+#######################################################################################
+################## Identificar todas as contas ativas no dominio ######################
+#######################################################################################
+
+#Get-ADUser -Filter {Enabled -eq $true} -Properties SamAccountName,DisplayName,givenName,mail,Department, lastlogon | Select-Object SamAccountName, DisplayName,mail,Department, lastlogon  #| Export-Csv 'caminho_pasta\user.csv'
+#Auditoria de contas, cruzamento de informações com outros bancos de dados
+
+############################################################################################
+################## Usuários ativos cujas senhas nunca expiram ##############################
+############################################################################################
+
+#USO: Contas que nunca expiram são um grave risco ao ambiente principalmente somado aos fatores senhas fracas e usuários que utilizam a mesma senha em diversas plataformas,
+#caso um banco de dados dessas plataformas vazem o ambiente segue em risco mesmo com o colaborador desligado, caso não haja um processo de revogação de acessos bem definido e aplicado.
+
+######################################################################################################
+################## Identificar contas que possuem data de expiração definida ##########################
+#######################################################################################################
+
+#Substituir a condição "-TimeSpan" pela quantidade de dias a ser filtrada.
+#Search-ADAccount -AccountExpiring -TimeSpan 365.00:00:00 | FT Name,ObjectClass -A
+
+#USO: proatividade no atendimento aos usuários
+

@@ -1,0 +1,4 @@
+#Comandos de arquivos
+
+#coletar hash de arquivo
+Get-FileHash "caminho/completo/do/arquivo.doc" | Format-List
